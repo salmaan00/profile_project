@@ -1,0 +1,67 @@
+/* Custom CSS for the index page */
+
+/* General Styles */
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Navbar Styles */
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+/* Header Styles */
+header {
+    background: linear-gradient(135deg, #4e73df 0%, #224abe 100%);
+    color: white;
+}
+
+header .btn-light {
+    background-color: rgba(255, 255, 255, 0.8);
+    border-color: rgba(255, 255, 255, 0.8);
+}
+
+header .btn-outline-light {
+    color: rgba(255, 255, 255, 0.8);
+    border-color: rgba(255, 255, 255, 0.8);
+}
+
+header .btn-light:hover,
+header .btn-outline-light:hover {
+    background-color: white;
+    color: #05133d;
+    border-color: white;
+}
+
+/* Feature Section Styles */
+.card {
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card i {
+    font-size: 3rem;
+}
+
+.card-title {
+    font-weight: bold;
+    font-size: 1.25rem;
+}
+
+.card-text {
+    color: #6c757d;
+}
+
+/* Footer Styles */
+footer {
+    background-color: #343a40;
+}
+
+footer p {
+    margin-bottom: 0;
+    color: #adb5bd;
+}

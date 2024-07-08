@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="portfolio">
+        <h1>{{ portfolio.user.username }}'s Portfolio</h1>
+        <!-- Display portfolio details and projects here -->
+        <ul class="list-unstyled">
+            {% for project in portfolio.project_set.all %}
+                <li id="project-{{ project.id }}" class="mb-3">
+                    <div class="project-details border p-3 rounded bg-light">
+                        <h3>{{ project.name }}</h3>
+                        <p>{{ project.description }}</p>
+                        <p><a href="{{ project.url }}" target="_blank">{{ project.url }}</a></p>
+                        <button class="edit-button btn btn-primary" data-project-id="{{ project.id }}">Edit</button>
+                    </div>
+                    <div class="edit-form border p-3 rounded bg-light" style="display: none;">
+                        <form id="edit-form-{{ project.id }}" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label for="name-{{ project.id }}">Name</label>
+                                <input type="text" id="name-{{ project.id }}" name="name" value="{{ project.name }}" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label for="description-{{ project.id }}">Description</label>
+                                <textarea id="description-{{ project.id }}" name="description" class="form-control">{{ project.description }}</textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="url-{{ project.id }}">URL</label>
+                                <input type="url" id="url-{{ project.id }}" name="url" value="{{ project.url }}" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label for="image-{{ project.id }}">Image</label>
+                                <input type="file" id="image-{{ project.id }}" name="image" class="form-control">
+                            </div>
+                            <button type="submit" class="btn btn-success">Save</button>
+                            <button type="button" class="cancel-edit btn btn-secondary" data-project-id="{{ project.id }}">Cancel</button>
+                        </form>
+                    </div>
+                </li>
+            {% empty %}
+                <li>No projects available</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <a href="{% url 'delete_portfolio' portfolio.id %}" class="btn btn-danger mt-3">Delete Portfolio</a>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const editButtons = document.querySelectorAll('.edit-button');
+    const cancelButtons = document.querySelectorAll('.cancel-edit');
+
+    editButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const projectId = this.getAttribute('data-project-id');
+            const projectDetails = document.getElementById(`project-${projectId}`).querySelector('.project-details');
+            const editForm = document.getElementById(`project-${projectId}`).querySelector('.edit-form');
+
+            projectDetails.style.display = 'none';
+            editForm.style.display = 'block';
+        });
+    });
+
+    cancelButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const projectId = this.getAttribute('data-project-id');
+            const projectDetails = document.getElementById(`project-${projectId}`).querySelector('.project-details');
+            const editForm = document.getElementById(`project-${projectId}`).querySelector('.edit-form');
+
+            projectDetails.style.display = 'block';
+            editForm.style.display = 'none';
+        });
+    });
+});
+</script>
+{% endblock %}

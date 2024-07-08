@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <div class="alert alert-warning" role="alert">
+        <h4 class="alert-heading">Portfolio Not Found</h4>
+        <p>The portfolio for user <strong>{{ user.username }}</strong> does not exist.</p>
+        <hr>
+        <div><button class="btn btn-primary custom-button">
+            <a href="{% url 'home' %}" class="button-link">Return to Home</a>
+        </button></div>
+        <br>
+        <div><button class="btn btn-primary custom-button">
+            <a href="{% url 'edit_portfolio' %}" class="button-link">Edit Portfolio</a>
+        </button></div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Edit Profile</h2>
+<form method="post">
+    {% csrf_token %}
+    <div class="mb-3">
+        {{ form.bio.label_tag }}
+        {{ form.bio }}
+    </div>
+    <div class="mb-3">
+        {{ form.skills.label_tag }}
+        {{ form.skills }}
+    </div>
+    <div class="mb-3">
+        {{ form.contact.label_tag }}
+        {{ form.contact }}
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+<a href="{% url 'profile' username=user_profile.user.username %}">Back to profile</a>
+{% endblock %}

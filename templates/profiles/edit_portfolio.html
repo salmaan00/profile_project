@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+  <h1 class="mb-4">Edit Your Portfolio</h1>
+  <form method="post">
+      {% csrf_token %}
+      <div class="mb-3">
+          {{ form.work_experience.label_tag }}
+          {{ form.work_experience }}
+      </div>
+      <div class="mb-3">
+          {{ form.education.label_tag }}
+          {{ form.education }}
+      </div>
+      <div class="mb-3">
+          {{ form.certifications.label_tag }}
+          {{ form.certifications }}
+      </div>
+      <button type="submit" class="btn btn-primary">Save</button>
+  </form>
+</div>
+{% endblock %}
